@@ -1,0 +1,24 @@
+<%= stylesheet_link_tag 'whatsapp' %>
+
+<% if flash[:error] %>
+  <div class="alert alert-danger">
+    <%= flash[:error] %>
+  </div>
+<% end %>
+
+<% if flash[:success] %>
+  <div class="alert alert-success">
+    <%= flash[:success] %>
+  </div>
+<% end %>
+
+<div class="form-container">
+    <%= form_tag enviar_mensagem_path, method: :post do %>
+    <div>
+        <%= label_tag :mensagem, 'Mensagem:', class: 'label' %><br>
+        <%= text_field_tag :mensagem, '', rows: 4, class: 'text-field' %>
+    </div>
+
+    <%= submit_tag 'Enviar Mensagem', class: 'botao' %>
+    <% end %>
+</div>
