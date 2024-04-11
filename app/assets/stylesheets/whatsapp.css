@@ -1,16 +1,63 @@
+html, body{
+    height: 100%;
+    margin: 0;
+}
+
 body{
     font-family: sans-serif;
     background-color: #054A3D;
+    padding: 0;
+}
+
+.chat-container{
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    height: 100%;
+}
+
+.messages-container{
+    height: 80%;
+    width: 100%;
+    background-color: #292929;
+    overflow-y: auto;
+    display: flex;
+    flex-direction:column;
+    align-items: end;
+    flex-wrap: nowrap;
+}
+
+.message {
+    max-height: 10%;
+    max-width: 25%;
+    background-color: #005C4B;
+    color: #f5f5f5;
+    margin: 1% 3% 1% 0; /* Adjust margins */
+    padding: 1% 3%; /* Add padding for spacing within the message bubbles */
+    border-radius: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.message h3{
+    margin: 0;
+
 }
 
 .form-container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 2rem;
-    border-radius: 1rem;
-    background-color: #70B77E;
+    width: 100%;
+    max-width: 100%;
+    height: 20%;
+    margin: 0 0;
+    background-color: #292929;
     text-align: center;
-    margin-top: 5rem;
+}
+
+.form-container form{
+    width: 100%;
+    height: 80%;
+    margin-top: 2%;
 }
 
 .form-container label {
@@ -20,23 +67,22 @@ body{
 }
 
 .text-field{
-    height: 2.5rem;
-    width:100%;
+    height: 3rem;
+    width:80%;
     border-radius: 1rem;
     border: none;
     margin-bottom: 2rem;
+    font-size: large;
+    margin-right: 0.5rem;
 }
 
 .botao{
     padding: 1rem;
     border-radius: 1rem;
-    box-sizing: content-box;
-    display: block;
     font-weight: 500;
-    background-color: #065143;
+    background-color: #FCC10F;
     color:#f5f5f5;
     border: none;
     font-size: 1rem;
     cursor: pointer;
-    align-self: center;
 }
