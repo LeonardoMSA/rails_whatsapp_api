@@ -1,5 +1,6 @@
 
 class WhatsappController < ApplicationController
+    skip_before_action :verify_authenticity_token, only: [:webhook_post]
     include HTTParty
 
     TOKEN = "EAAKjyq3JnT0BO65zfDJ9nr2FepjA7QoOJG3S7BTJGtW4SfbGxFlKKEJnXfvRZAm7lOTtqPo0pzAA08lDEZB1mv3ThAR2iLQvkZCCYE50Q0MmTZBGZC1mKpzScBlfnEZC3BSJuuy6IbhScTJAmVXNVCqmyVheH9PGnRAvqA4TrZBA9ZCouXbkZBZAorZAnq1sySwYrimfIjtCmTkejccu8vo7CxAlW9Bx5YllOrl"
@@ -57,4 +58,49 @@ class WhatsappController < ApplicationController
     
         redirect_to enviar_mensagem_path
     end
+
+    def webhook
+      if params['hub.mode'] == 'subscribe' && params['hub.verify_token'] == '12345'
+        render plain: params['hub.challenge'] and return
+      else
+        head :forbidden
+      end
+    end    
+
+    def webhook_post
+
+      # O 'request.body.read' lerá a entrada crua da solicitação POST.
+      # Certifique-se de que você lê o corpo da solicitação apenas uma vez,
+      # pois a leitura de `request.body` pode consumir o stream, tornando-o indisponível para leituras subsequentes.
+      payload = request.body.read
+      data = JSON.parse(payload)
+
+      # Aqui você pode acessar 'data' para obter as mensagens
+      if data['entry'] && data['entry'][0]['changes'][0]['field'] == 'messages'
+
+        data['entry'].each do |entry|
+          entry['changes'].each do |change|
+            if change['field'] == 'messages'              
+              handle_incoming_message(change['value'])
+            end
+          end
+        end
+        
+      end
+
+      head :no_content
+
+    end
+
+    private
+
+    def handle_incoming_message(message_data)
+
+      @mensagem = Message.new(body: message_data['messages'][0]['text']['body'])
+      @mensagem.save
+
+    end
+
+
 end
+

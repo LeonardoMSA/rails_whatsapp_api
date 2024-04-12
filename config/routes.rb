@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   get "/enviar_mensagem", to: "whatsapp#enviar_mensagem_form"
   post "/enviar_mensagem", to: "whatsapp#enviar_mensagem"
 
+  get '/webhook', to: 'whatsapp#webhook'
+  post '/webhook', to: 'whatsapp#webhook_post'
+
 
   # Defines the root path route ("/")
   # root "posts#index"
