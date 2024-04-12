@@ -5,7 +5,12 @@
   <div class="messages-container">
     
     <% @messages.each do |message| %>
-      <div class="message"><h3><%= message.body %></h3></div>
+      <% if message.sent %>
+        <div class="message"><h3><%= message.body %></h3></div>
+      <% else %>
+        <div class="message-received"><h3><%= message.body %></h3></div>
+      <% end %>
+
     <%end%>
 
   </div>

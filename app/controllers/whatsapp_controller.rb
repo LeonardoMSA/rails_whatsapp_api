@@ -96,8 +96,9 @@ class WhatsappController < ApplicationController
 
     def handle_incoming_message(message_data)
 
-      @mensagem = Message.new(body: message_data['messages'][0]['text']['body'])
+      @mensagem = Message.new(body: message_data['messages'][0]['text']['body'], sent: false)
       @mensagem.save
+      redirect_back(fallback_location: root_path)
 
     end
 

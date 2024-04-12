@@ -40,9 +40,25 @@ body{
     align-items: center;
 }
 
+.message-received{
+    max-height: 10%;
+    max-width: 25%;
+    background-color: #ECECEC;
+    color: #292929;
+    margin: 1% 85% 1% 0; /* Adjust margins */
+    padding: 1% 3%; /* Add padding for spacing within the message bubbles */
+    border-radius: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .message h3{
     margin: 0;
+}
 
+.message-received h3{
+    margin: 0;
 }
 
 .form-container {
