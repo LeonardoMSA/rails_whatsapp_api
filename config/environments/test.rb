@@ -11,7 +11,7 @@ Rails.application.configure do
   # While tests run files are not watched, reloading is not necessary.
   config.enable_reloading = false
 
-  config.hosts << "c32e-2804-14d-5480-8c43-bd93-dc69-dd18-469a.ngrok-free.app"
+  config.hosts << "truly-thorough-antelope.ngrok-free.app"
 
   # Eager loading loads your entire application. When running a single test locally,
   # this is usually not necessary, and can slow down your test suite. However, it's
