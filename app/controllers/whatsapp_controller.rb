@@ -3,14 +3,13 @@ class WhatsappController < ApplicationController
     skip_before_action :verify_authenticity_token, only: [:webhook_post]
     include HTTParty
 
-    TOKEN = "EAAKjyq3JnT0BO65zfDJ9nr2FepjA7QoOJG3S7BTJGtW4SfbGxFlKKEJnXfvRZAm7lOTtqPo0pzAA08lDEZB1mv3ThAR2iLQvkZCCYE50Q0MmTZBGZC1mKpzScBlfnEZC3BSJuuy6IbhScTJAmVXNVCqmyVheH9PGnRAvqA4TrZBA9ZCouXbkZBZAorZAnq1sySwYrimfIjtCmTkejccu8vo7CxAlW9Bx5YllOrl"
+    TOKEN = "EAAKjyq3JnT0BO09CZB0du2GZBXn8ZBr04CyTxTP39Ln7BjoPBFqOtZCzfqKY9lUczMZCK6ABZCb9NyqUUpSZCY7NTnU8efMImpFNPHTAbr0CH8ifpOQrvsMBTLpPTVP7KI44DzxM7GDMJdeoJYY1WR5rvdJ8WwJ3kBv5mhnpOTILqK8S8thyExGrH8csXADaM6jHLs8t9BBCC3XBc4oX6QWhv9ZBWdi63llHVwZDZD"
     SENDER_ID = "298264706694807"
     BUSINESS_ID = "281852878343628"
     RECIPIENT_ID = "5581982028696"
     BASE_URL = "https://graph.facebook.com/v18.0/" + SENDER_ID + "/messages"
 
-    def enviar_mensagem_form
-        # Renderiza o formulário de envio de mensagem
+    def enviar_mensagem_form        
         @messages = Message.all
     end
     
@@ -69,13 +68,9 @@ class WhatsappController < ApplicationController
 
     def webhook_post
 
-      # O 'request.body.read' lerá a entrada crua da solicitação POST.
-      # Certifique-se de que você lê o corpo da solicitação apenas uma vez,
-      # pois a leitura de `request.body` pode consumir o stream, tornando-o indisponível para leituras subsequentes.
       payload = request.body.read
       data = JSON.parse(payload)
 
-      # Aqui você pode acessar 'data' para obter as mensagens
       if data['entry'] && data['entry'][0]['changes'][0]['field'] == 'messages'
 
         data['entry'].each do |entry|
